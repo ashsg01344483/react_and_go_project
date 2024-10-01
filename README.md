@@ -1,2 +1,1 @@
-# aaaa
-aaaaa
+# ReactとGoのテスト実装

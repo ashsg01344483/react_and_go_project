@@ -35,7 +35,7 @@ export default function UpdateComponent() {
         try {
             await UpdateApi(user.ID, name, email);
             alert("ユーザーが更新されました！");
-            navigate("/"); // ユーザー一覧ページへリダイレクト
+            navigate("/"); // ユーザーリストページへリダイレクト
         } catch (error) {
             console.error("Error updating user:", error);
         }

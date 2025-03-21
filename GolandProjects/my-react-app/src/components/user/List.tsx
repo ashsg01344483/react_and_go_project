@@ -33,7 +33,7 @@ export default function ListComponent() {
 
     return (
         <div className="bg-gray-100 p-6">
-            <h1 className="text-3xl font-bold text-center mb-6">ユーザー一覧</h1>
+            <h1 className="text-3xl font-bold text-center mb-6">ユーザーリスト</h1>
             <div className="overflow-x-auto">
                 <table className="min-w-full bg-white border border-gray-300 shadow-md rounded-lg">
                     <thead className="bg-gray-300 text-gray-700 uppercase text-sm">

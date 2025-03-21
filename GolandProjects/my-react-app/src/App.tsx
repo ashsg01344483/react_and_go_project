@@ -7,7 +7,7 @@ export default function App() {
     return (
         <Router>
             <nav className="bg-gray-800 text-white p-4">
-                <Link to="/" className="mr-4">ユーザー一覧</Link>
+                <Link to="/" className="mr-4">ユーザーリスト</Link>
                 <Link to="/create">新規作成</Link>
             </nav>
             <Routes>

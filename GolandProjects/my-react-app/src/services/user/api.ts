@@ -3,7 +3,7 @@ import { User } from "../../models/user";
 const API_URL = "http://localhost:8080/users";
 
 /**
- * ユーザー一覧を取得
+ * ユーザーリストを取得
  */
 export const ListApi = async (): Promise<User[]> => {
     const response = await fetch(API_URL);

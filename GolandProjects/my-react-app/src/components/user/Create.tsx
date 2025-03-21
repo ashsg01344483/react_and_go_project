@@ -14,7 +14,7 @@ export default function CreateComponent() {
             alert("ユーザーが作成されました！");
             setName("");
             setEmail("");
-            navigate("/"); // ユーザー一覧ページへリダイレクト
+            navigate("/"); // ユーザーリストページへリダイレクト
         } catch (error) {
             console.error("Error creating user:", error);
         }

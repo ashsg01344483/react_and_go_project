@@ -13,6 +13,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./mysql/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - .:/app
     healthcheck:  # MySQL が起動完了するまで待機する設定
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s

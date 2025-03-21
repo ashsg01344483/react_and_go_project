@@ -13,7 +13,7 @@ func main() {
 	// DI で UserController を取得
 	userController, err := InitializeApp()
 	if err != nil {
-		log.Fatalf("❌ DI の初期化に失敗: %v", err)
+		log.Fatalf("DI の初期化に失敗: %v", err)
 	}
 
 	// Gin のルーティング設定

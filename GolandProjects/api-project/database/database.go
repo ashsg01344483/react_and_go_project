@@ -23,10 +23,10 @@ func NewDatabase() (*gorm.DB, error) {
 	// DB接続
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		fmt.Println("❌ データベース接続エラー:", err)
+		fmt.Println("データベース接続エラー:", err)
 		return nil, err
 	}
 
-	fmt.Println("✅ データベース接続成功")
+	fmt.Println("データベース接続成功")
 	return db, nil
 }

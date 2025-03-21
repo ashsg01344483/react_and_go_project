@@ -8,9 +8,8 @@ import (
 	"gorm.io/gorm"
 )
 
-var DB *gorm.DB
-
-func ConnectDB() {
+// NewDatabase はデータベースの接続を作成し、返す
+func NewDatabase() (*gorm.DB, error) {
 	// 環境変数から取得
 	dbUser := os.Getenv("DB_USER")
 	dbPassword := os.Getenv("DB_PASSWORD")
@@ -25,9 +24,9 @@ func ConnectDB() {
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		fmt.Println("❌ データベース接続エラー:", err)
-		panic("データベース接続に失敗しました")
+		return nil, err
 	}
 
-	DB = db
 	fmt.Println("✅ データベース接続成功")
+	return db, nil
 }

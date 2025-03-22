@@ -7,12 +7,24 @@ import (
 )
 
 // SetupRoutes ルーティング設定
-func SetupRoutes(r *gin.Engine, userController *controllers.UserController) {
-	api := r.Group("/users")
+func SetupRoutes(
+	r *gin.Engine,
+	userController *controllers.UserController,
+	memoController *controllers.MemoController,
+) {
+	user := r.Group("/users")
 	{
-		api.GET("", userController.GetList)
-		api.POST("", userController.Create)
-		api.PUT("/:id", userController.Update)
-		api.DELETE("/:id", userController.Delete)
+		user.GET("", userController.GetList)
+		user.POST("", userController.Create)
+		user.PUT("/:id", userController.Update)
+		user.DELETE("/:id", userController.Delete)
+	}
+
+	memo := r.Group("/memos")
+	{
+		memo.GET("", memoController.GetList)
+		memo.POST("", memoController.Create)
+		memo.PUT("/:id", memoController.Update)
+		memo.DELETE("/:id", memoController.Delete)
 	}
 }

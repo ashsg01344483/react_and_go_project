@@ -11,7 +11,7 @@ import (
 
 func main() {
 	// DI で UserController を取得
-	userController, err := InitializeApp()
+	appControllers, err := InitializeApp()
 	if err != nil {
 		log.Fatalf("DI の初期化に失敗: %v", err)
 	}
@@ -28,9 +28,9 @@ func main() {
 	}))
 
 	// ルーティング設定
-	router.SetupRoutes(r, userController)
+	router.SetupRoutes(r, appControllers.UserController, appControllers.MemoController)
 
 	// サーバー起動
-	fmt.Println("🚀 Server is running on port 8080...")
+	fmt.Println("Server is running on port 8080...")
 	r.Run(":8080")
 }

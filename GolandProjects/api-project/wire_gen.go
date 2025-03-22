@@ -9,14 +9,15 @@ package main
 import (
 	"api-project/controllers"
 	"api-project/database"
+	"api-project/di"
 	"api-project/repository"
 	"api-project/service"
 )
 
 // Injectors from wire.go:
 
-// InitializeApp は DI で UserController を生成する
-func InitializeApp() (*controllers.UserController, error) {
+// InitializeApp は DI で AppControllers を生成する
+func InitializeApp() (*di.AppControllers, error) {
 	db, err := database.NewDatabase()
 	if err != nil {
 		return nil, err
@@ -24,5 +25,12 @@ func InitializeApp() (*controllers.UserController, error) {
 	userRepository := repository.NewUserRepository(db)
 	userService := service.NewUserService(userRepository)
 	userController := controllers.NewUserController(userService)
-	return userController, nil
+	memoRepository := repository.NewMemoRepository(db)
+	memoService := service.NewMemoService(memoRepository)
+	memoController := controllers.NewMemoController(memoService)
+	appControllers := &di.AppControllers{
+		UserController: userController,
+		MemoController: memoController,
+	}
+	return appControllers, nil
 }

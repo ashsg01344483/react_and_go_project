@@ -6,19 +6,30 @@ package main
 import (
 	"api-project/controllers"
 	"api-project/database"
+	"api-project/di"
 	"api-project/repository"
 	"api-project/service"
 
-	"github.com/googl	e/wire"
+	"github.com/google/wire"
 )
 
-// InitializeApp は DI で UserController を生成する
-func InitializeApp() (*controllers.UserController, error) {
+// InitializeApp は DI で AppControllers を生成する
+func InitializeApp() (*di.AppControllers, error) {
 	wire.Build(
-		database.NewDatabase, // 修正: database.ConnectDB → database.NewDatabase
+		database.NewDatabase,
+
+		// User関連
 		repository.NewUserRepository,
 		service.NewUserService,
 		controllers.NewUserController,
+
+		// Memo関連
+		repository.NewMemoRepository,
+		service.NewMemoService,
+		controllers.NewMemoController,
+
+		// まとめて返す
+		wire.Struct(new(di.AppControllers), "*"),
 	)
 	return nil, nil
 }

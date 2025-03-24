@@ -1,4 +1,3 @@
-// ユーザーモデルの型定義
 export type User = {
     ID: number;
     Name: string;

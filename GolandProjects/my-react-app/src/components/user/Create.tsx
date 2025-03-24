@@ -1,8 +1,8 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {CreateApi} from "../../services/user/api"; // 修正！
 import {useNavigate} from "react-router-dom";
 
-export default function CreateComponent() {
+export default function UserCreate() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const navigate = useNavigate();

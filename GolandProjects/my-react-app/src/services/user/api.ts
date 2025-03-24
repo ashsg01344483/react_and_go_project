@@ -1,57 +1,21 @@
+import axios from "axios";
 import { User } from "../../models/user";
 
 const API_URL = "http://localhost:8080/users";
 
-/**
- * ユーザーリストを取得
- */
 export const ListApi = async (): Promise<User[]> => {
-    const response = await fetch(API_URL);
-    if (!response.ok) {
-        throw new Error("ユーザーの取得に失敗しました");
-    }
-    return response.json();
+    const res = await axios.get<User[]>(API_URL);
+    return res.data;
 };
 
-/**
- * 新規ユーザーを作成
- */
 export const CreateApi = async (name: string, email: string): Promise<void> => {
-    const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ Name: name, Email: email }),
-    });
-
-    if (!response.ok) {
-        throw new Error("ユーザーの作成に失敗しました");
-    }
+    await axios.post(API_URL, { Name: name, Email: email });
 };
 
-/**
- * ユーザーを更新
- */
 export const UpdateApi = async (id: number, name: string, email: string): Promise<void> => {
-    const response = await fetch(`${API_URL}/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ Name: name, Email: email }),
-    });
-
-    if (!response.ok) {
-        throw new Error("ユーザーの更新に失敗しました");
-    }
+    await axios.put(`${API_URL}/${id}`, { Name: name, Email: email });
 };
 
-/**
- * ユーザーを削除
- */
 export const DeleteApi = async (id: number): Promise<void> => {
-    const response = await fetch(`${API_URL}/${id}`, {
-        method: "DELETE",
-    });
-
-    if (!response.ok) {
-        throw new Error("ユーザーの削除に失敗しました");
-    }
+    await axios.delete(`${API_URL}/${id}`);
 };

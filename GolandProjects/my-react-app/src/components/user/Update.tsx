@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { User } from "../../models/user";
 import { ListApi, UpdateApi } from "../../services/user/api"; // APIをインポート
 
-export default function UpdateComponent() {
+export default function UserUpdate() {
     const { id } = useParams<{ id: string }>(); // URL から id を取得
     const navigate = useNavigate();
     const [user, setUser] = useState<User | null>(null);

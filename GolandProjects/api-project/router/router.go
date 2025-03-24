@@ -18,6 +18,7 @@ func SetupRoutes(
 		user.POST("", userController.Create)
 		user.PUT("/:id", userController.Update)
 		user.DELETE("/:id", userController.Delete)
+		user.GET("/search", userController.GetByEmail)
 	}
 
 	memo := r.Group("/memos")

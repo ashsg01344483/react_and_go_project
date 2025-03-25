@@ -8,8 +8,20 @@ export default function MemoCreate() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        // ログインユーザーの ID を取得
+        const userData = localStorage.getItem("user");
+        if (!userData) {
+            alert("ログイン情報が見つかりません。再度ログインしてください。");
+            navigate("/login");
+            return;
+        }
+
+        const user = JSON.parse(userData);
+        const userId = user.ID;
+
         try {
-            await CreateApi(memo);
+            await CreateApi(memo, userId); // ← userId を送信
             alert("メモを追加しました！");
             setMemo("");
             navigate("/memos");

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { User } from "../../models/user";
 
-const API_URL = "http://localhost:8080/users";
+const API_URL = "http://localhost:8080/users/";
 
 export const ListApi = async (): Promise<User[]> => {
     const res = await axios.get<User[]>(API_URL);

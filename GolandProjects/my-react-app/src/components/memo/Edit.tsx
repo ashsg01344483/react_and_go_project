@@ -1,36 +1,29 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Memo } from "../../models/memo";
-import { ListApi, UpdateApi } from "../../services/memo/api";
+import { GetByIdApi, UpdateApi } from "../../services/memo/api";
 
-export default function MemoUpdate() {
+export default function MemoEdit() {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
-    const [memo, setMemo] = useState<Memo | null>(null);
     const [content, setContent] = useState("");
 
     useEffect(() => {
         if (id) {
-            ListApi().then((memos) => {
-                const found = memos.find((m) => m.ID === Number(id));
-                if (found) {
-                    setMemo(found);
-                    setContent(found.Memo);
-                } else {
+            GetByIdApi(Number(id))
+                .then((memo) => {
+                    setContent(memo.Memo);
+                })
+                .catch((err) => {
+                    console.error("取得エラー:", err);
                     alert("メモが見つかりませんでした");
                     navigate("/memos");
-                }
-            }).catch((err) => {
-                console.error("取得エラー:", err);
-                navigate("/memos");
-            });
+                });
         }
     }, [id, navigate]);
 
     const handleUpdate = async () => {
-        if (!memo) return;
         try {
-            await UpdateApi(memo.ID, content);
+            await UpdateApi(Number(id), content);
             alert("メモを更新しました！");
             navigate("/memos");
         } catch (error) {

@@ -3,7 +3,7 @@ import Login from "./components/auth/Login";
 import NavBar from "./components/NavBar";
 import MemoList from "./components/memo/List";
 import MemoCreate from "./components/memo/Create";
-import MemoUpdate from "./components/memo/Update";
+import MemoEdit from "./components/memo/Edit";
 import UserCreate from "./components/user/Create";
 
 export default function App() {
@@ -21,7 +21,7 @@ function AppContent() {
     const showNavBarPaths = [
         "/memos",
         "/memos/create",
-        "/memos/update",
+        "/memos/edit",
         // 必要があれば "/users" なども追加可能
     ];
 
@@ -39,7 +39,7 @@ function AppContent() {
                 <Route path="/create" element={<UserCreate />} />
                 <Route path="/memos" element={<MemoList />} />
                 <Route path="/memos/create" element={<MemoCreate />} />
-                <Route path="/memos/update/:id" element={<MemoUpdate />} />
+                <Route path="/memos/edit/:id" element={<MemoEdit />} />
             </Routes>
         </>
     );

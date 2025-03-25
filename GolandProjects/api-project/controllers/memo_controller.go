@@ -4,6 +4,7 @@ import (
 	"api-project/models"
 	"api-project/service"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"strconv"
 )
 
@@ -16,12 +17,42 @@ func NewMemoController(service *service.MemoService) *MemoController {
 }
 
 func (c *MemoController) GetList(ctx *gin.Context) {
-	memos, err := c.Service.GetList()
-	if err != nil {
-		ctx.JSON(500, gin.H{"error": "メモの取得に失敗しました"})
+	userIdStr := ctx.Query("userId")
+	if userIdStr == "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "userIdが必要です"})
 		return
 	}
-	ctx.JSON(200, memos)
+
+	userId, err := strconv.Atoi(userIdStr)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "userIdが正しくありません"})
+		return
+	}
+
+	memos, err := c.Service.GetListByUserID(uint(userId))
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "メモの取得に失敗しました"})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, memos)
+}
+
+func (c *MemoController) GetByID(ctx *gin.Context) {
+	idParam := ctx.Param("id")
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "IDが正しくありません"})
+		return
+	}
+
+	memo, err := c.Service.GetByID(uint(id))
+	if err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{"error": "メモが見つかりません"})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, memo)
 }
 
 func (c *MemoController) Create(ctx *gin.Context) {

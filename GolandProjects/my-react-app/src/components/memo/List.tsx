@@ -15,7 +15,14 @@ export default function MemoList() {
 
     const fetchMemos = async () => {
         try {
-            const data = await ListApi();
+            const userData = localStorage.getItem("user");
+            if (!userData) {
+                alert("ログイン情報がありません");
+                navigate("/login");
+                return;
+            }
+            const user = JSON.parse(userData);
+            const data = await ListApi(user.ID); // ← userIdを渡すように変更
             setMemos(data);
         } catch (error) {
             console.error("メモの取得に失敗:", error);
@@ -67,7 +74,7 @@ export default function MemoList() {
                                 </td>
                                 <td className="px-4 py-2 border text-center">
                                     <button
-                                        onClick={() => navigate(`/update/${memo.ID}`)}
+                                        onClick={() => navigate(`/memos/edit/${memo.ID}`)}
                                         className="bg-yellow-500 text-white px-3 py-1 rounded h-8 mr-2 hover:bg-yellow-600"
                                     >
                                         編集

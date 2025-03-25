@@ -13,12 +13,20 @@ func NewMemoRepository(db *gorm.DB) *MemoRepository {
 	return &MemoRepository{DB: db}
 }
 
-// FindAll 全メモを取得
-func (r *MemoRepository) FindAll() ([]models.Memo, error) {
+// FindByUserID ユーザーIDを元にメモリストを取得
+func (r *MemoRepository) FindByUserID(userId uint) ([]models.Memo, error) {
 	var memos []models.Memo
-	// userとのリレーション
-	err := r.DB.Preload("User").Find(&memos).Error
+	err := r.DB.Where("user_id = ?", userId).Find(&memos).Error
 	return memos, err
+}
+
+// FindByID 特定のメモを取得
+func (r *MemoRepository) FindByID(id uint) (*models.Memo, error) {
+	var memo models.Memo
+	if err := r.DB.First(&memo, id).Error; err != nil {
+		return nil, err
+	}
+	return &memo, nil
 }
 
 // Create メモを作成

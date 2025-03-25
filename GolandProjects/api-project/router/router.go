@@ -24,6 +24,7 @@ func SetupRoutes(
 	memo := r.Group("/memos")
 	{
 		memo.GET("", memoController.GetList)
+		memo.GET("/:id", memoController.GetByID)
 		memo.POST("", memoController.Create)
 		memo.PUT("/:id", memoController.Update)
 		memo.DELETE("/:id", memoController.Delete)

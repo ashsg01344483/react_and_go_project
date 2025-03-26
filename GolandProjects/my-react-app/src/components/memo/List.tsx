@@ -7,7 +7,8 @@ export default function MemoList() {
     const [memos, setMemos] = useState<Memo[]>([]);
     const navigate = useNavigate();
 
-    const userEmail = localStorage.getItem("userEmail");
+    const userData = localStorage.getItem("user");
+    const user = userData ? JSON.parse(userData) : null;
 
     useEffect(() => {
         fetchMemos();
@@ -44,7 +45,7 @@ export default function MemoList() {
     return (
         <div className="bg-gray-100 p-6">
             <div className="mb-6 text-right">
-                <p className="text-sm text-gray-700">ログインEmail: <span className="font-bold">{userEmail}</span></p>
+                <p className="text-sm text-gray-700">ログインEmail: <span className="font-bold">{user?.Email}</span></p>
             </div>
 
             <h1 className="text-3xl font-bold text-center mb-6">メモ一覧</h1>

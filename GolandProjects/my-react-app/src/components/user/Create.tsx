@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {CreateApi} from "../../services/user/api"; // 修正！
+import {CreateApi} from "@/services/user/api"; // 修正！
 import {useNavigate} from "react-router-dom";
 
 export default function UserCreate() {

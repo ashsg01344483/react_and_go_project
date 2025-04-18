@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { GetByIdApi, UpdateApi } from "../../services/memo/api";
+import { GetByIdApi, UpdateApi } from "@/services/memo/api";
 
 export default function MemoEdit() {
     const { id } = useParams<{ id: string }>();

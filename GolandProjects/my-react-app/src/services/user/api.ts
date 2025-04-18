@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User } from "../../models/user";
+import { User } from "@/models/user";
 
 const API_URL = "http://localhost:8080/users/";
 

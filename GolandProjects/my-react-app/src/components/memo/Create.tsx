@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CreateApi } from "../../services/memo/api";
+import { CreateApi } from "@/services/memo/api";
 
 export default function MemoCreate() {
     const [memo, setMemo] = useState("");

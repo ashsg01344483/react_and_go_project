@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { User } from "../../models/user";
-import { ListApi, DeleteApi } from "../../services/user/api"; // APIをインポート
+import { User } from "@/models/user";
+import { ListApi, DeleteApi } from "@/services/user/api"; // APIをインポート
 
 export default function UserList() {
     const [users, setUsers] = useState<User[]>([]);

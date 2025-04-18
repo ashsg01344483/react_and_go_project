@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Memo } from "../../models/memo";
-import { ListApi, DeleteApi } from "../../services/memo/api";
+import { Memo } from "@/models/memo";
+import { ListApi, DeleteApi } from "@/services/memo/api";
 import { useNavigate } from "react-router-dom";
 
 export default function MemoList() {

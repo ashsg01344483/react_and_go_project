@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Memo } from "../../models/memo";
+import { Memo } from "@/models/memo";
 
 const API_URL = "http://localhost:8080/memos";
 
